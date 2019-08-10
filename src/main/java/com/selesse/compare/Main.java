@@ -4,7 +4,6 @@ import com.selesse.compare.filesystem.DirectoryRoot;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -12,14 +11,14 @@ public class Main {
             throw new RuntimeException("Expected 2 arguments, got " + args.length);
         }
 
-        String firstDirectory = args[0];
-        String secondDirectory = args[1];
+        var firstDirectory = args[0];
+        var secondDirectory = args[1];
 
-        Path firstPath = new File(firstDirectory).toPath();
-        Path secondPath = new File(secondDirectory).toPath();
+        var firstPath = new File(firstDirectory).toPath();
+        var secondPath = new File(secondDirectory).toPath();
 
-        DirectoryRoot firstRoot = DirectoryRoot.fromPath(firstPath);
-        DirectoryRoot secondRoot = DirectoryRoot.fromPath(secondPath);
+        var firstRoot = DirectoryRoot.fromPath(firstPath);
+        var secondRoot = DirectoryRoot.fromPath(secondPath);
 
         System.out.println("Hello world" + firstRoot);
         System.out.println("Hello world" + secondRoot);

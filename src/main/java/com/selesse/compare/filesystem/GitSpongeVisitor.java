@@ -21,7 +21,7 @@ public class GitSpongeVisitor extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
-        if (!shouldIgnorePath(dir)) {
+        if (!shouldIgnorePath(dir) && attrs.isDirectory()) {
             directoryRoot.addDirectory(dir);
         }
         return super.preVisitDirectory(dir, attrs);
@@ -29,7 +29,7 @@ public class GitSpongeVisitor extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        if (!shouldIgnorePath(file)) {
+        if (!shouldIgnorePath(file) && attrs.isRegularFile()) {
             directoryRoot.addFile(file);
         }
         return super.visitFile(file, attrs);

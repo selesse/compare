@@ -32,7 +32,7 @@ public class DirectoryRoot {
     }
 
     public static DirectoryRoot fromPath(Path path) throws IOException {
-        SpongeVisitor filesystemVisitor = new SpongeVisitor();
+        GitSpongeVisitor filesystemVisitor = new GitSpongeVisitor(path);
         Files.walkFileTree(path, filesystemVisitor);
         return filesystemVisitor.getFileSystem();
     }

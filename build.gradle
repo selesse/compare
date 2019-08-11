@@ -10,6 +10,9 @@ sourceCompatibility = 1.11
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://dl.bintray.com/neva-dev/maven-public/'
+    }
 }
 
 application {
@@ -17,5 +20,6 @@ application {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'com.neva.commons:gitignore-file-filter:1.0.0'
+    testCompile 'junit:junit:4.12'
 }

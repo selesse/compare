@@ -20,7 +20,7 @@ public class Main {
         var firstRoot = DirectoryRoot.fromPath(firstPath);
         var secondRoot = DirectoryRoot.fromPath(secondPath);
 
-        System.out.println("Hello world" + firstRoot);
-        System.out.println("Hello world" + secondRoot);
+        System.out.printf("%s => %d directories, %d files%n", firstPath, firstRoot.getDirectories().size(), firstRoot.getFiles().size());
+        System.out.printf("%s => %d directories, %d files%n", secondPath, secondRoot.getDirectories().size(), secondRoot.getFiles().size());
     }
 }

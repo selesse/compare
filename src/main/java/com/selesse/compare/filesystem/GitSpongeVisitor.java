@@ -14,7 +14,7 @@ public class GitSpongeVisitor extends SimpleFileVisitor<Path> {
     private Path folderRoot;
 
     GitSpongeVisitor(Path folderRoot) {
-        this.directoryRoot = new DirectoryRoot();
+        this.directoryRoot = new DirectoryRoot(folderRoot);
         this.gitIgnore = new GitIgnore(folderRoot.toFile());
         this.folderRoot = folderRoot;
     }

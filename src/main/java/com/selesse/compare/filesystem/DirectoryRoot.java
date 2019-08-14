@@ -9,8 +9,10 @@ import java.util.List;
 public class DirectoryRoot {
     private List<Path> directories;
     private List<Path> files;
+    private Path folderRoot;
 
-    DirectoryRoot() {
+    DirectoryRoot(Path folderRoot) {
+        this.folderRoot = folderRoot;
         this.directories = new ArrayList<>();
         this.files = new ArrayList<>();
     }
@@ -29,6 +31,10 @@ public class DirectoryRoot {
 
     public List<Path> getFiles() {
         return files;
+    }
+
+    public Path getFolderRoot() {
+        return folderRoot;
     }
 
     public static DirectoryRoot fromPath(Path path) throws IOException {

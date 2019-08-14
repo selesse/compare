@@ -12,11 +12,11 @@ import java.util.*;
  *
  * Specifically, this diff format assumes that relative paths are important.
  */
-public class StructuredFolderDiff {
+public class StructuredFolderDiff implements Diff {
     private final DirectoryRoot rootA;
     private final DirectoryRoot rootB;
 
-    public StructuredFolderDiff(DirectoryRoot rootA, DirectoryRoot rootB) {
+    StructuredFolderDiff(DirectoryRoot rootA, DirectoryRoot rootB) {
         this.rootA = rootA;
         this.rootB = rootB;
     }

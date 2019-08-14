@@ -32,8 +32,9 @@ public class Md5Worker implements Callable<Md5Result> {
             md5.get().reset();
             return new Md5Result(file, sha);
         } catch (IOException e) {
-            System.out.println(file);
-            throw new RuntimeException(e);
+            System.out.println("Error calculating md5 for " + file);
+            e.printStackTrace();
+            return new Md5Result(file, "");
         }
     }
 }

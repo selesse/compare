@@ -5,10 +5,7 @@ import com.selesse.compare.workers.Md5Result;
 import com.selesse.compare.workers.Md5Service;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Diff strategy that only considers file contents.
@@ -26,14 +23,12 @@ public class FileContentDiff implements Diff {
             md5Results.addAll(new Md5Service(root).getMd5Results());
         }
 
-        Map<String, List<Path>> diffMap = computeDiffMap(md5Results);
+        List<UniqueFileDiffResult> diffResults = computeDiffMap(md5Results);
 
-        for (String uniqueFile : diffMap.keySet()) {
-            List<Path> associatedPaths = diffMap.get(uniqueFile);
-            associatedPaths.sort(Path::compareTo);
-            if (associatedPaths.size() > 1) {
+        for (UniqueFileDiffResult uniqueFile : diffResults) {
+            if (uniqueFile.paths.size() > 1) {
                 System.out.println("Same file contents found in multiple locations:");
-                for (Path associatedPath : associatedPaths) {
+                for (Path associatedPath : uniqueFile.paths) {
                     System.out.println("  " + associatedPath);
                 }
                 System.out.println("");
@@ -41,7 +36,7 @@ public class FileContentDiff implements Diff {
         }
     }
 
-    private Map<String, List<Path>> computeDiffMap(List<Md5Result> allResults) {
+    private List<UniqueFileDiffResult> computeDiffMap(List<Md5Result> allResults) {
         Map<String, List<Path>> results = new HashMap<>();
         for (Md5Result result : allResults) {
             String md5 = result.md5;
@@ -49,6 +44,19 @@ public class FileContentDiff implements Diff {
             paths.add(result.file);
             results.put(md5, paths);
         }
-        return results;
+        return mapToSortedDiffResult(results);
+    }
+
+    private List<UniqueFileDiffResult> mapToSortedDiffResult(Map<String, List<Path>> results) {
+        List<UniqueFileDiffResult> uniqueFileDiffResults = new ArrayList<>();
+        for (Map.Entry<String, List<Path>> stringListEntry : results.entrySet()) {
+            String md5Result = stringListEntry.getKey();
+            List<Path> paths = stringListEntry.getValue();
+            paths.sort(Path::compareTo);
+
+            uniqueFileDiffResults.add(new UniqueFileDiffResult(md5Result, paths));
+        }
+        uniqueFileDiffResults.sort(Comparator.comparing(o -> o.paths.get(0)));
+        return uniqueFileDiffResults;
     }
 }

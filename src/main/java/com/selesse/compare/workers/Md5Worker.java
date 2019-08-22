@@ -1,8 +1,8 @@
 package com.selesse.compare.workers;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -25,9 +25,12 @@ public class Md5Worker implements Callable<Md5Result> {
 
     @Override
     public Md5Result call() {
-        try {
-            byte[] fileBytes = Files.readAllBytes(file);
-            md5.get().update(fileBytes);
+        try (FileInputStream inputStream = new FileInputStream(file.toFile())) {
+            byte[] buffer = new byte[8 * 1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                md5.get().update(buffer, 0, bytesRead);
+            }
             var sha = new BigInteger(1, md5.get().digest()).toString(16);
             md5.get().reset();
             return new Md5Result(file, sha);

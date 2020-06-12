@@ -1,4 +1,4 @@
-package com.selesse.compare.filesystem.comparison;
+package com.selesse.compare.filesystem.comparison.primitives;
 
 import java.nio.file.Path;
 import java.util.List;

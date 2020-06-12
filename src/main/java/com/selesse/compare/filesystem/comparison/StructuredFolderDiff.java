@@ -1,6 +1,7 @@
 package com.selesse.compare.filesystem.comparison;
 
 import com.selesse.compare.filesystem.DirectoryRoot;
+import com.selesse.compare.filesystem.comparison.primitives.Md5DiffResult;
 import com.selesse.compare.workers.Md5Result;
 import com.selesse.compare.workers.Md5Service;
 

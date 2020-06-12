@@ -23,7 +23,7 @@ public class FileContentDiff implements Diff {
             md5Results.addAll(new Md5Service(root).getMd5Results());
         }
 
-        List<UniqueFileDiffResult> diffResults = computeDiffMap(md5Results);
+        List<UniqueFileDiffResult> diffResults = computeDiffs(md5Results);
 
         for (UniqueFileDiffResult uniqueFile : diffResults) {
             if (uniqueFile.paths.size() > 1) {
@@ -36,7 +36,7 @@ public class FileContentDiff implements Diff {
         }
     }
 
-    private List<UniqueFileDiffResult> computeDiffMap(List<Md5Result> allResults) {
+    private List<UniqueFileDiffResult> computeDiffs(List<Md5Result> allResults) {
         Map<String, List<Path>> results = new HashMap<>();
         for (Md5Result result : allResults) {
             String md5 = result.md5;

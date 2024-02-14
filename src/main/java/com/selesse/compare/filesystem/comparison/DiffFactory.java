@@ -13,7 +13,7 @@ public class DiffFactory {
     public static Diff create(String[] args) throws IOException {
         if (Arrays.asList(args).contains("--type=file")) {
             List<String> directories =
-                    Stream.of(args).filter(arg -> !arg.equals("--type=file")).collect(Collectors.toList());
+                    Stream.of(args).filter(arg -> !arg.equals("--type=file")).toList();
             return new FileContentDiff(directories.stream()
                     .map(dir -> {
                         try {
@@ -24,7 +24,7 @@ public class DiffFactory {
                     }).toArray(DirectoryRoot[]::new));
         } else if (Arrays.asList(args).contains("--type=directory")) {
             List<String> directories =
-                    Stream.of(args).filter(arg -> !arg.equals("--type=directory")).collect(Collectors.toList());
+                    Stream.of(args).filter(arg -> !arg.equals("--type=directory")).toList();
             if (directories.size() != 2) {
                 throw new RuntimeException("Expected 2 directories to compare, got " + directories.size());
             }

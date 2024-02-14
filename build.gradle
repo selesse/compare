@@ -6,8 +6,6 @@ plugins {
 group 'com.selesse'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.11
-
 repositories {
     mavenCentral()
     maven {

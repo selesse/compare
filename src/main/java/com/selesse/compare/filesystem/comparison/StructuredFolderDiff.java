@@ -45,13 +45,13 @@ public class StructuredFolderDiff implements Diff {
         }
 
         if (!filesOnlyInA.isEmpty()) {
-            System.out.println("Only in " + rootA.getFolderRoot().getFileName());
+            System.out.println("Only in " + rootA.getFolderRoot().getFileName() + " (A)");
             for (Md5DiffResult diffResult : filesOnlyInA) {
                 System.out.println("  A - " + diffResult.getAResult().file);
             }
         }
         if (!filesOnlyInB.isEmpty()) {
-            System.out.println("Only in " + rootB.getFolderRoot().getFileName());
+            System.out.println("Only in " + rootB.getFolderRoot().getFileName() + " (B)");
             for (Md5DiffResult diffResult : filesOnlyInB) {
                 System.out.println("  B - " + diffResult.getBResult().file);
             }

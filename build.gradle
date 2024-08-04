@@ -8,9 +8,6 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-    maven {
-        url 'https://dl.bintray.com/neva-dev/maven-public/'
-    }
 }
 
 application {
@@ -18,6 +15,12 @@ application {
 }
 
 dependencies {
-    compile 'com.neva.commons:gitignore-file-filter:1.0.0'
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+            vendor = JvmVendorSpec.ADOPTIUM
+    }
 }

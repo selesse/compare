@@ -38,8 +38,11 @@ public class DirectoryRoot {
     }
 
     public static DirectoryRoot fromPath(Path path) throws IOException {
-        GitSpongeVisitor filesystemVisitor = new GitSpongeVisitor(path);
-        Files.walkFileTree(path, filesystemVisitor);
-        return filesystemVisitor.getFileSystem();
+        if (Files.isDirectory(path.resolve(".git"))) {
+            return new GitVisitor(path).getFileSystem();
+        }
+        else {
+            return new SpongeVisitor(path).getFileSystem();
+        }
     }
 }

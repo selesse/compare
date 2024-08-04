@@ -4,9 +4,9 @@ import com.selesse.compare.filesystem.DirectoryRoot;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DiffFactory {
@@ -34,8 +34,11 @@ public class DiffFactory {
             var firstPath = new File(firstDirectory).toPath();
             var secondPath = new File(secondDirectory).toPath();
 
+            System.out.println("First directory " + LocalDateTime.now());
             var firstRoot = DirectoryRoot.fromPath(firstPath);
+            System.out.println("Second directory " + LocalDateTime.now());
             var secondRoot = DirectoryRoot.fromPath(secondPath);
+            System.out.println("Done" + LocalDateTime.now());
 
             System.out.printf("%s => %d directories, %d files%n", firstPath, firstRoot.getDirectories().size(), firstRoot.getFiles().size());
             System.out.printf("%s => %d directories, %d files%n", secondPath, secondRoot.getDirectories().size(), secondRoot.getFiles().size());
